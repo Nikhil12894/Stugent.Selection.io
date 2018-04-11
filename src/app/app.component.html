@@ -1,7 +1,63 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<div class="navbar"></div>
+<div class="contianer" *ngIf="exampleShow">
+  <fieldset>
+  <em class="text-danger">Note :</em><span class="text-info"> All The values are case sensitive and position may vary</span>
+  <div style="overflow-x:auto;">
+          <tr class="table table-striped">
+            <th>StudentName</th>
+            <th>StudentMarks</th>
+            <th>Gender</th>
+            <th>Category</th>
+            <th>FatherName</th>
+            <th>First_Choice</th>
+            <th>Second_Choice</th>
+            <th>Third_Choice</th>
+            <th>Fourth_Choice</th>
+            <th>Fifth_Choice</th>
+          </tr>
+  </div>
+  </fieldset>
+</div>
+
+<div class="contianer" *ngIf="btnDesable">
+  <fieldset>
+  <div class="row">
+    <div class="col-xl col-lg col-md"></div>
+    <div class="col-xl col-lg col-md">
+      <button type="button" class="btn btn-primary" (click)="show_Form()">EnterData - Manually</button>
+      <button type="button" class="btn btn-danger" (click)="show_FileUploder()">Upload-Excel-File</button>
+    </div>
+    <div class="col-xl col-lg col-md"></div>
+  </div>
+</fieldset>
+</div>
 
 
-<div class="container">
+<div class="contianer" *ngIf="showFilewUpload">
+  <fieldset>
+  <div class="row">
+    <div class="col-xl-3 col-lg-3 col-md-3"></div>
+    <div class="col-xl-6 col-lg-6 col-md-6"> 
+            <div class="alert alert-danger" role="alert">
+              Headings of Excel file must be same as shown in example<a href="#" class="alert-link"
+              (click)="showExample()">Example</a>
+            </div>
+    </div>
+  <div class="col-xl-3 col-lg-3 col-md-3"></div>
+  </div>
+  <div class="row">
+    <div class="col-xl col-lg col-md"></div>
+    <div class="col-xl col-lg col-md">
+      <input type="file" class="btn btn-primary btn-sm float-left"(change)="incomingfile($event)" accept=".xlsx">
+      <button type="button" class="btn btn-info" (click)="Upload()" >Upload</button>
+    </div>
+    <div class="col-xl col-lg col-md"></div>
+  </div>
+</fieldset>
+</div>
+
+<div class="container" *ngIf="FormShow">
   <div class="row">
     <div class="col-xl col-lg col-md">
       <app-student-details (childEvent) = "list = $event"></app-student-details>
@@ -71,7 +127,7 @@
             <td>{{ tab.StudentName }}</td>
             <td>{{ tab.FatherName }}</td>
             <td>{{ tab.StudentMarks }}</td>
-            <td>{{ tab.Catogery }}</td>
+            <td>{{ tab.Category }}</td>
             <td>{{ tab.Gender }}</td>
             <td>{{ tab.First_Choice }}</td>
             <td>{{ tab.Second_Choice }}</td>

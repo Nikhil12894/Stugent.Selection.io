@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import * as XLSX from 'ts-xlsx';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -82,10 +82,10 @@ for(let c of choice){
     if(this.general_B.length<20){
       var stdnt = this.list.pop();
       this.general_B.push(stdnt);
-    }else if(this.mushlim_B.length<12 && this.list[i].Catogery === "Muslim"){
+    }else if(this.mushlim_B.length<12 && this.list[i].Category === "Muslim"){
       var stdnt: any = this.list.splice(i, 1);
       this.mushlim_B.push(stdnt);
-    }else if(this.OBC_SC_ST_B.length<4 && this.list[i].Catogery === "OBC/SC/ST"){
+    }else if(this.OBC_SC_ST_B.length<4 && this.list[i].Category === "OBC/SC/ST"){
       var stdnt: any = this.list.splice(i, 1);
       this.OBC_SC_ST_B.push(stdnt);
     }else if(this.women_B.length<4 && this.list[i].Gender === "Female"){
@@ -100,10 +100,10 @@ for(let c of choice){
     if(this.general_C.length<20){
       var stdnt = this.list.pop();
       this.general_C.push(stdnt);
-    }else if(this.mushlim_C.length<12 && this.list[i].Catogery === "Muslim"){
+    }else if(this.mushlim_C.length<12 && this.list[i].Category === "Muslim"){
       var stdnt: any = this.list.splice(i, 1);
       this.mushlim_C.push(stdnt);
-    }else if(this.OBC_SC_ST_C.length<4 && this.list[i].Catogery === "OBC/SC/ST"){
+    }else if(this.OBC_SC_ST_C.length<4 && this.list[i].Category === "OBC/SC/ST"){
       var stdnt: any = this.list.splice(i, 1);
       this.OBC_SC_ST_C.push(stdnt);
     }else if(this.women_C.length<4 && this.list[i].Gender === "Female"){
@@ -118,10 +118,10 @@ for(let c of choice){
     if(this.general_D.length<20){
       var stdnt = this.list.pop();
       this.general_D.push(stdnt);
-    }else if(this.mushlim_D.length<12 && this.list[i]["Catogery"] === "Muslim"){
+    }else if(this.mushlim_D.length<12 && this.list[i]["Category"] === "Muslim"){
       var stdnt: any = this.list.splice(i, 1);
       this.mushlim_D.push(stdnt);
-    }else if(this.OBC_SC_ST_D.length<4 && this.list[i].Catogery === "OBC/SC/ST"){
+    }else if(this.OBC_SC_ST_D.length<4 && this.list[i].Category === "OBC/SC/ST"){
       var stdnt: any = this.list.splice(i, 1);
       this.OBC_SC_ST_D.push(stdnt);
     }else if(this.women_D.length<4 && this.list[i].Gender === "Female"){
@@ -136,10 +136,10 @@ for(let c of choice){
     if(this.general_E.length<20){
       var stdnt = this.list.pop();
       this.general_E.push(stdnt);
-    }else if(this.mushlim_E.length<12 && this.list[i].Catogery === "Muslim"){
+    }else if(this.mushlim_E.length<12 && this.list[i].Category === "Muslim"){
       var stdnt: any = this.list.splice(i, 1);
       this.mushlim_E.push(stdnt);
-    }else if(this.OBC_SC_ST_E.length<4 && this.list[i].Catogery === "OBC/SC/ST"){
+    }else if(this.OBC_SC_ST_E.length<4 && this.list[i].Category === "OBC/SC/ST"){
       var stdnt: any = this.list.splice(i, 1);
       this.OBC_SC_ST_E.push(stdnt);
     }else if(this.women_E.length<4 && this.list[i].Gender === "Female"){
@@ -181,5 +181,45 @@ disableButton:boolean = true;
 desabled(){
   this.disableButton = !this.disableButton;
 }
+FormShow: boolean = false;
+btnDesable: boolean= true;
+showFilewUpload: boolean=false; 
+show_Form(){
+this.FormShow = true;
+this.btnDesable = false;
+}
+show_FileUploder(){
+this.showFilewUpload=true;  
+this.btnDesable = false;
+}
 
+arrayBuffer:any;
+file:File;
+incomingfile(event) 
+  {
+  this.file= event.target.files[0]; 
+  }
+
+ Upload() {
+      let fileReader = new FileReader();
+        fileReader.onload = (e) => {
+            this.arrayBuffer = fileReader.result;
+            var data = new Uint8Array(this.arrayBuffer);
+            var arr = new Array();
+            for(var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+            var bstr = arr.join("");
+            var workbook = XLSX.read(bstr, {type:"binary"});
+            var first_sheet_name = workbook.SheetNames[0];
+            var worksheet = workbook.Sheets[first_sheet_name];
+            console.log(XLSX.utils.sheet_to_json(worksheet,{raw:true}));
+            this.list = XLSX.utils.sheet_to_json(worksheet,{raw:true});
+            this.list.sort((a,b)=>a.StudentMarks - b.StudentMarks);
+        }
+        fileReader.readAsArrayBuffer(this.file);
+
+}
+exampleShow: boolean = false;
+showExample(){
+  this.exampleShow = !this.exampleShow;
+}
 }

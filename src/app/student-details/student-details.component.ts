@@ -8,7 +8,7 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./student-details.component.css']
 })
 export class StudentDetailsComponent implements OnInit {
-Catogery = ["General","Muslim","OBC/SC/ST"];
+Category = ["General","Muslim","OBC/SC/ST"];
 DepartmentChoice = ["A","B","C","D","E"];
 Gender = ["Male","Female"];
 listOfAllStudent = new Array();

@@ -15,43 +15,45 @@
           </tr>
         </thead>
         <tbody>
-<label><strong>General</strong></label><br>
+          <br>
+<label><strong style="text-align: center">General</strong></label><hr>
           <tr *ngFor = "let G of general; let i = index">
             <td>{{ i }}</td>
             <td>{{ G.StudentName }}</td>
             <td>{{ G.FatherName }}</td>
             <td>{{ G.StudentMarks }}</td>
-            <td>{{ G.Catogery }}</td>
+            <td>{{ G.Category }}</td>
             <td>{{ G.Gender }}</td>
           </tr>
-
-<label><strong>Muslim</strong></label><br>
+<br>
+<label><strong style="text-align: center">Muslim</strong></label>
+<hr>
           <tr *ngFor = "let M of _mushlim; let i = index">
             <td>{{ i }}</td>
             <td>{{ M.StudentName }}</td>
             <td>{{ M.FatherName }}</td>
             <td>{{ M.StudentMarks }}</td>
-            <td>{{ M.Catogery }}</td>
+            <td>{{ M.Category }}</td>
             <td>{{ M.Gender }}</td>
           </tr>
-
-<label><strong>Women</strong></label><br>
+<br>
+<label><strong style="text-align: center">Women</strong></label><hr>
           <tr *ngFor = "let W of _women; let i = index">
             <td>{{ i }}</td>
             <td>{{ W.StudentName }}</td>
             <td>{{ W.FatherName }}</td>
             <td>{{ W.StudentMarks }}</td>
-            <td>{{ W.Catogery }}</td>
+            <td>{{ W.Category }}</td>
             <td>{{ W.Gender }}</td>
           </tr>
-
-<label><strong>OBC/SC/ST</strong></label><br>
+<br>
+<label><strong style="text-align: center">OBC/SC/ST</strong></label><hr>
           <tr *ngFor = "let O of _other; let i = index">
             <td>{{ i }}</td>
             <td>{{ O.StudentName }}</td>
             <td>{{ O.FatherName }}</td>
             <td>{{ O.StudentMarks }}</td>
-            <td>{{ O.Catogery }}</td>
+            <td>{{ O.Category }}</td>
             <td>{{ O.Gender }}</td>
           </tr>
         </tbody>
